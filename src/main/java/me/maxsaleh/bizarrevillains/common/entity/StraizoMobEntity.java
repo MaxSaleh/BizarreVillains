@@ -4,10 +4,12 @@ import me.maxsaleh.bizarrevillains.common.init.ModEntityType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.network.IPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.Random;
 
@@ -27,6 +29,11 @@ public class StraizoMobEntity extends MonsterEntity {
     }
 
     @Override
+    public IPacket<?> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
     public void tick() {
         World level = this.level;
         float currentHealth = this.getHealth();
@@ -34,5 +41,10 @@ public class StraizoMobEntity extends MonsterEntity {
         if (level.getGameTime() % 200 == 0) { // 10 seconds
 
         }
+    }
+
+    @Override
+    protected boolean isSunBurnTick() {
+        return true;
     }
 }

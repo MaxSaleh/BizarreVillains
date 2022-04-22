@@ -7,30 +7,28 @@ import me.maxsaleh.bizarrevillains.common.entity.StraizoMobEntity;
 import me.maxsaleh.bizarrevillains.utilities.ModReference;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.model.BatModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class StraizoMobRenderer extends EntityRenderer<StraizoMobEntity> {
+@OnlyIn(Dist.CLIENT)
+public class StraizoMobRenderer extends MobRenderer<StraizoMobEntity, StaizoMobModel> {
     public static final ResourceLocation modelTexture = new ResourceLocation(ModReference.MOD_ID, "textures/entity/straizo_mob.png");
-    private static final RenderType RENDER_TYPE = RenderType.entitySolid(modelTexture);
-    private final StaizoMobModel model = new StaizoMobModel();
 
     public StraizoMobRenderer(EntityRendererManager rendererManager) {
-        super(rendererManager);
+        super(rendererManager, new StaizoMobModel(), 0.75F);
     }
 
     @Override
-    public void render(StraizoMobEntity entity, float p_225623_2_, float p_225623_3_, MatrixStack matrixStack, IRenderTypeBuffer iRenderTypeBuffer, int packedLight) {
-        matrixStack.pushPose();
-        IVertexBuilder ivertexbuilder = iRenderTypeBuffer.getBuffer(RENDER_TYPE);
-        matrixStack.translate(0.0F, 1.5F, 0.0F);
-        matrixStack.mulPose(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), 180.0F, true));
-        model.renderToBuffer(matrixStack, ivertexbuilder, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-        matrixStack.popPose();
+    protected void scale(StraizoMobEntity entity, MatrixStack matrixStack, float p_225620_3_) {
+        matrixStack.scale(1F, 1F, 1F);
     }
 
     @Override
