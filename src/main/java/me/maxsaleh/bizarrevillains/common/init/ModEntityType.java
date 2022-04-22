@@ -27,8 +27,8 @@ public class ModEntityType {
     @SubscribeEvent
     public static void entitySpawnPlacementRegistry(final RegistryEvent.Register<EntityType<?>> event) {
         EntitySpawnPlacementRegistry.register(
-                STRAIZO.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MonsterEntity::checkMonsterSpawnRules);
+                STRAIZO.get(), EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS,
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, StraizoMobEntity::spawning);
     }
 
 }
