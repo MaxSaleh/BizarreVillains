@@ -1,6 +1,5 @@
 package me.maxsaleh.bizarrevillains.common.init;
 
-import me.maxsaleh.bizarrevillains.common.entity.StraizoMobEntity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
